@@ -6,7 +6,7 @@ This project is an **RPG-style game** built from the ground up using Python.
 
 ### Tech Stack
 
-* **Language:** Python 3.14
+* **Language:** Pythons
 * **Genre:** RPG (Role-Playing Game)
 
 ## How to Run
