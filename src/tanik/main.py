@@ -1,5 +1,6 @@
 def main():
-    print("Ok, I don't like reach.")
+    print("Ok, I don't like rich.")
 
 if __name__ == "__main__":
     main()
+    
