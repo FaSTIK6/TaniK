@@ -1,10 +1,24 @@
-# Python-generated files
+# --- Python ---
 __pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Virtual environments
-.venv
+# --- VS Code (системные файлы редактора) ---
+.vscode/
+.history/
+.DS_Store
+
+# --- uv (инструменты управления зависимостями) ---
+.python-version
+uv.lock
+
+# --- OS (системные файлы) ---
+.DS_Store
+Thumbs.db

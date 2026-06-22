@@ -16,4 +16,4 @@ This project is an **RPG-style game** built from the ground up using Python.
 2. Sync dependencies:
    `uv sync`
 3. Run the game:
-   `uv run src/tanik/main.py`
+   `uv run python -m src.tanik.main`
