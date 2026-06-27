@@ -1,22 +1,29 @@
-# IT'S TEST
-# IT'S TEST
-# IT'S TEST
-# IT'S TEST
+from .bus import bus 
+import raylib as rl 
+from utils import c_str 
 
-from tanik.bus import bus
+player_hp = 100 
 
-# 1. Создаем тестовые обработчики
-def test_engine_handler(thrust):
-    print(f"Двигатель получил сигнал: Мощность {thrust}%")
+def hpDamage(hp: int) -> None:
+    global player_hp
+    player_hp -= hp
 
-def test_ui_handler(thrust):
-    print(f"UI получил сигнал: Рисуем шкалу {thrust}%")
 
-# 2. Подписываем их на событие
-bus.connect("ENGINE", test_engine_handler)
-bus.connect("UI", test_ui_handler)
+bus.connect("HP_DAMAGE", hpDamage) 
 
-# 3. Эмитим событие
-print("--- Начинаем тест шины ---")
-bus.emit("ENGINE", 12)
-bus.emit("UI", 56)
+if __name__ == "__main__": 
+    rl.InitWindow(800, 450, c_str("New library")) 
+    rl.SetTargetFPS(60) 
+
+    while not rl.WindowShouldClose(): 
+        rl.BeginDrawing() 
+        rl.ClearBackground(rl.WHITE) 
+
+        if rl.IsKeyPressed(rl.KEY_W): 
+            bus.emit("HP_DAMAGE", 10) 
+
+        rl.DrawText(c_str(f"hp: {player_hp}"), 100, 100, 100, rl.BLACK) 
+
+        rl.EndDrawing() 
+
+    rl.CloseWindow()
