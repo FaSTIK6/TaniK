@@ -1,29 +1,23 @@
-from .bus import bus 
-import raylib as rl 
-from utils import c_str 
+# Шина
+from .bus import bus
 
-player_hp = 100 
+# Разные утилиты для удобной работы
+from utils import clear_terminal
 
-def hpDamage(hp: int) -> None:
-    global player_hp
-    player_hp -= hp
+# Логика игры
+from engine import AssetManager, AssetId, Color
+from engine import input_handler
 
+# Визуальная часть игры
+from ui import draw_menu
 
-bus.connect("HP_DAMAGE", hpDamage) 
 
 if __name__ == "__main__": 
-    rl.InitWindow(800, 450, c_str("New library")) 
-    rl.SetTargetFPS(60) 
+    # Инициализация менеджера ассетов
+    assets = AssetManager()
 
-    while not rl.WindowShouldClose(): 
-        rl.BeginDrawing() 
-        rl.ClearBackground(rl.WHITE) 
-
-        if rl.IsKeyPressed(rl.KEY_W): 
-            bus.emit("HP_DAMAGE", 10) 
-
-        rl.DrawText(c_str(f"hp: {player_hp}"), 100, 100, 100, rl.BLACK) 
-
-        rl.EndDrawing() 
-
-    rl.CloseWindow()
+    # Загрузка ассетов
+    assets.load(AssetId.PLAYER, "@", Color.YELLOW)
+    assets.load(AssetId.WALL, "#", Color.GRAY)
+    assets.load(AssetId.SMALL_ENEMY, "e", Color.RED)
+    assets.load(AssetId.NORMAL_ENEMY, "E", Color.RED)

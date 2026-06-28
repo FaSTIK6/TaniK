@@ -6,4 +6,4 @@ def clear_terminal() -> None:
     не очищая его полностью.
     """
     sys.stdout.write("\033[H")
-    sys.stdout.flush()
+    sys.stdout.flush() 
