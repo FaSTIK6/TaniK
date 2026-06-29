@@ -15,5 +15,4 @@ class EventBus:
         if event_name in self._subscribers:
             for callback in self._subscribers[event_name]:
                 callback(*args, **kwargs)
-
-bus = EventBus()
+    
