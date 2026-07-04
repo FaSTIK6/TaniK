@@ -1,19 +1,18 @@
-# Шина
-from engine import EventBus
-
 # Разные утилиты для удобной работы
 from utils import clear_terminal
 
 # Логика игры
-from engine import AssetManager, AssetId, Color
+from tanik.engine import AssetManager, AssetId, Color
+from tanik.engine import bus, Signals
+from tanik.engine import menu_input_handler
 
-# Визуальная часть игры
-from ui import draw_menu
+# UI игры
+from tanik.ui import draw_menu
 
-if __name__ == "__main__":
+
+def main():
     # Инициализация
     assets = AssetManager()
-    bus = EventBus
 
     # Загрузка ассетов
     assets.load(AssetId.PLAYER, "@", Color.YELLOW)
@@ -22,6 +21,19 @@ if __name__ == "__main__":
     assets.load(AssetId.NORMAL_ENEMY, "E", Color.RED)
     assets.load(AssetId.FLOOR, ".", Color.GRAY)
 
-    # TODO: The Entire Game!!!
+    bus.connect(
+        Signals.CURRENT_MENU_STATE,
+        draw_menu,
+    )
+
+    while True:
+        clear_terminal()
+        menu_input_handler()
 
     assets.unload_all()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass

@@ -1,3 +1,20 @@
+from enum import Enum, auto
+
+class States(Enum):
+    PLAY_STATE       = auto() # 1. Go fight!
+    STATS_STATE      = auto() # 2. Stats
+    ACHIVMENTS_STATE = auto() # 3. Achivments
+    INVENTORY_STATE  = auto() # i. Inventory
+    UPGRADE_STATE    = auto() # u. Upgrade menu
+    SHOP_STATE       = auto() # s. Shop
+    EVENTS_STATE     = auto() # v. Events
+    SETTINGS_STATE   = auto() # e. Setings
+    SAVE_STATE       = auto() # a. Save
+    QUIT_STATE       = auto() # q. Quit
+
+class Signals(Enum):
+    CURRENT_MENU_STATE = auto()
+
 class EventBus:
     def __init__(self):
         self._subscribers = {}
@@ -15,4 +32,5 @@ class EventBus:
         if event_name in self._subscribers:
             for callback in self._subscribers[event_name]:
                 callback(*args, **kwargs)
-    
+
+bus = EventBus()
