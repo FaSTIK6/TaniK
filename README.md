@@ -29,5 +29,5 @@ This project is an **RPG-style game** built from the ground up using Python.
 
 4. **Run the game:**
    ```bash
-   uv run python -m tanik.main
+   clear && uv run python -m tanik.main
    ```

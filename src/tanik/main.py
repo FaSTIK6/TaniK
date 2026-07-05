@@ -3,14 +3,14 @@ from utils import clear_terminal
 
 # Логика игры
 from tanik.engine import AssetManager, AssetId, Color
-from tanik.engine import bus, Signals
+from tanik.engine import bus, Signals, States
 from tanik.engine import menu_input_handler
 
 # UI игры
 from tanik.ui import draw_menu
 
 
-def main():
+def main() -> None:
     # Инициализация
     assets = AssetManager()
 
@@ -28,7 +28,15 @@ def main():
 
     while True:
         clear_terminal()
-        menu_input_handler()
+
+        current_state: States = menu_input_handler()
+        bus.emit(
+            Signals.CURRENT_MENU_STATE,
+            current_state=current_state,
+        )
+
+        if 1 == 1:
+            break
 
     assets.unload_all()
 

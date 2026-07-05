@@ -12,6 +12,19 @@ class States(Enum):
     SAVE_STATE       = auto() # a. Save
     QUIT_STATE       = auto() # q. Quit
 
+state_map = {
+    "1": States.PLAY_STATE,
+    "2": States.STATS_STATE,
+    "3": States.ACHIVMENTS_STATE,
+    "i": States.INVENTORY_STATE,
+    "u": States.UPGRADE_STATE,
+    "s": States.SHOP_STATE,
+    "v": States.EVENTS_STATE,
+    "e": States.SETTINGS_STATE,
+    "a": States.SAVE_STATE,
+    "q": States.QUIT_STATE
+}
+
 class Signals(Enum):
     CURRENT_MENU_STATE = auto()
 

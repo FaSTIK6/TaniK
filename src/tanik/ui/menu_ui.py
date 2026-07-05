@@ -1,4 +1,4 @@
-def draw_menu(current_state):
+def draw_menu(current_state) -> None:
     buf: str = "\n"
 
     buf += "   ╔════════════════════════════\n"
