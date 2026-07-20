@@ -1,12 +1,6 @@
-from .bus import bus, States, Signals, state_map
-
-
-current_state: States = States.PLAY_STATE
+from .states import States, state_map
 
 
 def menu_input_handler() -> States:
-    global current_state
-
-    current_state = state_map.get("e", "Err! menu_input_handler")
-
-    return current_state
+    user_input = input("   => ").strip().lower()
+    return state_map.get(user_input, States.PLAY_STATE)

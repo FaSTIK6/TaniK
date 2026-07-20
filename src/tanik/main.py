@@ -1,44 +1,25 @@
-# Разные утилиты для удобной работы
+from tanik.engine import AssetManager, States, menu_input_handler
+from tanik.ui import draw_menu, load_assets
 from utils import clear_terminal
 
-# Логика игры
-from tanik.engine import AssetManager, AssetId, Color
-from tanik.engine import bus, Signals, States
-from tanik.engine import menu_input_handler
 
-# UI игры
-from tanik.ui import draw_menu
-
-
-def main() -> None:
-    # Инициализация
+def main():
     assets = AssetManager()
+    load_assets(assets)
 
-    # Загрузка ассетов
-    assets.load(AssetId.PLAYER, "@", Color.YELLOW)
-    assets.load(AssetId.WALL, "#", Color.GRAY)
-    assets.load(AssetId.SMALL_ENEMY, "e", Color.RED)
-    assets.load(AssetId.NORMAL_ENEMY, "E", Color.RED)
-    assets.load(AssetId.FLOOR, ".", Color.GRAY)
-
-    bus.connect(
-        Signals.CURRENT_MENU_STATE,
-        draw_menu,
-    )
+    current_state = States.PLAY_STATE
 
     while True:
         clear_terminal()
+        draw_menu()
 
-        current_state: States = menu_input_handler()
-        bus.emit(
-            Signals.CURRENT_MENU_STATE,
-            current_state=current_state,
-        )
+        current_state = menu_input_handler()
 
-        if 1 == 1:
+        if current_state == States.QUIT_STATE:
             break
 
     assets.unload_all()
+
 
 if __name__ == "__main__":
     try:
